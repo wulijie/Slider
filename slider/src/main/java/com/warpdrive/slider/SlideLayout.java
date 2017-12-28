@@ -73,7 +73,7 @@ public class SlideLayout extends FrameLayout {
      */
     private List<SlideListener> mListeners;
 
-    Drawable mShadowLeft;
+    Drawable mSlideShadow;
 
     private float mScrimOpacity;
 
@@ -167,11 +167,11 @@ public class SlideLayout extends FrameLayout {
      * view.
      *
      * @param listener the swipe listener to attach to this view
-     * @deprecated use {@link #addSwipeListener} instead
+     * @deprecated use {@link #addSlideListener} instead
      */
     @Deprecated
-    public void setSwipeListener(SlideListener listener) {
-        addSwipeListener(listener);
+    public void setSlideListener(SlideListener listener) {
+        addSlideListener(listener);
     }
 
     /**
@@ -179,9 +179,9 @@ public class SlideLayout extends FrameLayout {
      *
      * @param listener the swipe listener to attach to this view
      */
-    public void addSwipeListener(SlideListener listener) {
+    public void addSlideListener(SlideListener listener) {
         if (mListeners == null) {
-            mListeners = new ArrayList<SlideListener>();
+            mListeners = new ArrayList<>();
         }
         mListeners.add(listener);
     }
@@ -191,7 +191,7 @@ public class SlideLayout extends FrameLayout {
      *
      * @param listener
      */
-    public void removeSwipeListener(SlideListener listener) {
+    public void removeSlideListener(SlideListener listener) {
         if (mListeners == null) {
             return;
         }
@@ -214,7 +214,7 @@ public class SlideLayout extends FrameLayout {
 
 
     public void setShadow(Drawable shadow) {
-        mShadowLeft = shadow;
+        mSlideShadow = shadow;
         invalidate();
     }
 
@@ -229,7 +229,7 @@ public class SlideLayout extends FrameLayout {
     public void scrollToFinishActivity() {
         final int childWidth = mContentView.getWidth();
         int left = 0, top = 0;
-        left = childWidth + mShadowLeft.getIntrinsicWidth() + OVERSCROLL_DISTANCE;
+        left = childWidth + mSlideShadow.getIntrinsicWidth() + OVERSCROLL_DISTANCE;
         mDragHelper.smoothSlideViewTo(mContentView, left, top);
         invalidate();
     }
@@ -242,7 +242,6 @@ public class SlideLayout extends FrameLayout {
         try {
             return mDragHelper.shouldInterceptTouchEvent(event);
         } catch (Exception e) {
-//            e.printStackTrace();
             return false;
         }
     }
@@ -255,7 +254,6 @@ public class SlideLayout extends FrameLayout {
         try {
             mDragHelper.processTouchEvent(event);
         } catch (Exception e) {
-//            e.printStackTrace();
             return false;
         }
         return true;
@@ -306,11 +304,10 @@ public class SlideLayout extends FrameLayout {
     private void drawShadow(Canvas canvas, View child) {
         final Rect childRect = mTmpRect;
         child.getHitRect(childRect);
-
-        mShadowLeft.setBounds(childRect.left - mShadowLeft.getIntrinsicWidth(), childRect.top,
+        mSlideShadow.setBounds(childRect.left - mSlideShadow.getIntrinsicWidth(), childRect.top,
                 childRect.left, childRect.bottom);
-        mShadowLeft.setAlpha((int) (mScrimOpacity * FULL_ALPHA));
-        mShadowLeft.draw(canvas);
+        mSlideShadow.setAlpha((int) (mScrimOpacity * FULL_ALPHA));
+        mSlideShadow.draw(canvas);
     }
 
     public void attachToActivity(Activity activity) {
@@ -417,7 +414,7 @@ public class SlideLayout extends FrameLayout {
             int left = 0, top = 0;
             //判断释放以后是应该滑到最右边(关闭)，还是最左边（还原）
             left = xvel > 0 || xvel == 0 && mScrollPercent > mScrollThreshold ? childWidth
-                    + mShadowLeft.getIntrinsicWidth() + OVERSCROLL_DISTANCE : 0;
+                    + mSlideShadow.getIntrinsicWidth() + OVERSCROLL_DISTANCE : 0;
             mDragHelper.settleCapturedViewAt(left, top);
             invalidate();
         }

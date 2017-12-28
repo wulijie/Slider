@@ -34,19 +34,19 @@ public class SlidePage {
         handleLayout();
     }
 
-    public SlidePage setSwipeRelateEnable(boolean enable) {
+    public SlidePage setSlideRelatedEnable(boolean enable) {
         mRelativeEnable = enable;
         slider.setEnable(enable);
         return this;
     }
 
-    public SlidePage setSwipeRelateOffset(int offset) {
+    public SlidePage setSlideRelatedOffset(int offset) {
         slider.setOffset(offset);
         return this;
     }
 
     //是否可滑动关闭
-    public SlidePage setSwipeBackEnable(boolean enable) {
+    public SlidePage setSlideEnable(boolean enable) {
         mEnable = enable;
         mSlideLayout.setEnableGesture(enable);
         handleLayout();
@@ -62,19 +62,19 @@ public class SlidePage {
     }
 
     //可滑动的范围。百分比。200表示为左边200px的屏幕
-    public SlidePage setSwipeEdge(int swipeEdge) {
+    public SlidePage setSlideEdge(int swipeEdge) {
         mSlideLayout.setEdgeSize(swipeEdge);
         return this;
     }
 
     //可滑动的范围。百分比。0.2表示为左边20%的屏幕
-    public SlidePage setSwipeEdgePercent(float swipeEdgePercent) {
+    public SlidePage setSlideEdgePercent(float swipeEdgePercent) {
         mSlideLayout.setEdgeSizePercent(swipeEdgePercent);
         return this;
     }
 
     //对横向滑动手势的敏感程度。0为迟钝 1为敏感
-    public SlidePage setSwipeSensitivity(float sensitivity) {
+    public SlidePage setSlideSensitivity(float sensitivity) {
         mSlideLayout.setSensitivity(mActivity, sensitivity);
         return this;
     }
@@ -97,16 +97,16 @@ public class SlidePage {
     }
 
     public SlidePage addListener(SlideListener listener) {
-        mSlideLayout.addSwipeListener(listener);
+        mSlideLayout.addSlideListener(listener);
         return this;
     }
 
     public SlidePage removeListener(SlideListener listener) {
-        mSlideLayout.removeSwipeListener(listener);
+        mSlideLayout.removeSlideListener(listener);
         return this;
     }
 
-    public SlideLayout getSwipeBackLayout() {
+    public SlideLayout getSlideLayout() {
         return mSlideLayout;
     }
 

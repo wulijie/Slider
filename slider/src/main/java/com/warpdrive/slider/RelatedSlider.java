@@ -1,7 +1,6 @@
 package com.warpdrive.slider;
 
 import android.os.Build;
-import android.support.annotation.RequiresApi;
 
 /**
  * Created by wulijie on 2017/12/28.
@@ -24,15 +23,14 @@ public class RelatedSlider implements SlideListener {
         else curPage.removeListener(this);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     @Override
     public void onScroll(float percent, int px) {
         if (Build.VERSION.SDK_INT > 11) {
             SlidePage page = SlideHelper.getPrePage(curPage);
             if (page != null) {
-                page.getSwipeBackLayout().setX(Math.min(-offset * Math.max(1 - percent, 0) + DEFAULT_OFFSET, 0));
+                page.getSlideLayout().setX(Math.min(-offset * Math.max(1 - percent, 0) + DEFAULT_OFFSET, 0));
                 if (percent == 0) {
-                    page.getSwipeBackLayout().setScrollX(0);
+                    page.getSlideLayout().setScrollX(0);
                 }
             }
         }
@@ -40,14 +38,13 @@ public class RelatedSlider implements SlideListener {
 
     @Override
     public void onEdgeTouch() {
-
     }
 
     @Override
     public void onScrollToClose() {
         SlidePage page = SlideHelper.getPrePage(curPage);
         if (Build.VERSION.SDK_INT > 11) {
-            if (page != null) page.getSwipeBackLayout().setX(0);
+            if (page != null) page.getSlideLayout().setX(0);
         }
     }
 }

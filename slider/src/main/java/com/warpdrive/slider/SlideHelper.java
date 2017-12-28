@@ -6,21 +6,22 @@ import java.util.Stack;
 
 /**
  * Created by wulijie on 2017/12/28.
+ * TODO:单例-stack 不要静态持有activity的引用了
  */
 public class SlideHelper {
     private static final Stack<SlidePage> mPageStack = new Stack<>();
 
     private static SlidePage findHelperByActivity(Activity activity) {
-        for (SlidePage swipeBackPage : mPageStack) {
-            if (swipeBackPage.mActivity == activity) return swipeBackPage;
+        for (SlidePage slidePage : mPageStack) {
+            if (slidePage.mActivity == activity) return slidePage;
         }
         return null;
     }
 
-    public static SlidePage getCurrentPage(Activity activity) {
+    public static SlidePage with(Activity activity) {
         SlidePage page;
         if ((page = findHelperByActivity(activity)) == null) {
-            throw new RuntimeException("You Should call SwipeBackHelper.onCreate(activity) first");
+            throw new IllegalArgumentException("You Should call SlideHelper.onCreate(activity) first");
         }
         return page;
     }
@@ -36,7 +37,7 @@ public class SlideHelper {
     public static void onPostCreate(Activity activity) {
         SlidePage page;
         if ((page = findHelperByActivity(activity)) == null) {
-            throw new RuntimeException("You Should call SwipeBackHelper.onCreate(activity) first");
+            throw new IllegalArgumentException("You Should call SlideHelper.onCreate(activity) first");
         }
         page.onPostCreate();
     }
@@ -44,7 +45,7 @@ public class SlideHelper {
     public static void onDestroy(Activity activity) {
         SlidePage page;
         if ((page = findHelperByActivity(activity)) == null) {
-            throw new RuntimeException("You Should call SwipeBackHelper.onCreate(activity) first");
+            throw new IllegalArgumentException("You Should call SlideHelper.onCreate(activity) first");
         }
         mPageStack.remove(page);
         page.mActivity = null;
@@ -53,7 +54,7 @@ public class SlideHelper {
     public static void finish(Activity activity) {
         SlidePage page;
         if ((page = findHelperByActivity(activity)) == null) {
-            throw new RuntimeException("You Should call SwipeBackHelper.onCreate(activity) first");
+            throw new IllegalArgumentException("You Should call SlideHelper.onCreate(activity) first");
         }
         page.scrollToFinishActivity();
     }
