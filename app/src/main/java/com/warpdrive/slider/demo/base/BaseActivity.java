@@ -3,8 +3,9 @@ package com.warpdrive.slider.demo.base;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
-import com.warpdrive.slider.SlideHelper;
+import com.warpdrive.slider.Slider;
 import com.warpdrive.slider.demo.R;
 
 /**
@@ -14,8 +15,7 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SlideHelper.onCreate(this);
-        SlideHelper.with(this)
+        Slider.with(this)
                 .setSlideEnable(isSlide())
                 .setSlideEdge(100)
                 .setSlideSensitivity(0.5f)
@@ -28,13 +28,14 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        SlideHelper.onPostCreate(this);
+        Slider.onPostCreate(this);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        SlideHelper.onDestroy(this);
+        Slider.onDestroy(this);
+        Log.e("Slider", "页面销毁了");
     }
 
     /**

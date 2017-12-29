@@ -6,54 +6,36 @@ import java.util.Stack;
 
 /**
  * Created by wulijie on 2017/12/28.
- * TODO:单例-stack 不要静态持有activity的引用了
  */
-public class SlideHelper {
+public class Slider {
 
     private static final Stack<SlidePage> mPageStack = new Stack<>();
 
+    private static final String EXCEPTION_MESSAGE = "you should call Slider.with(activity) first";
 
     public static SlidePage with(Activity activity) {
-        SlidePage page;
-        if ((page = findHelperByActivity(activity)) == null) {
-            throw new IllegalArgumentException("You Should call SlideHelper.onCreate(activity) first");
+        SlidePage page = findSliderByActivity(activity);
+        if (page == null) {
+            page = mPageStack.push(new SlidePage(activity));
+            page.init();
         }
         return page;
     }
 
-    public static void onCreate(Activity activity) {
-        SlidePage page;
-        if ((page = findHelperByActivity(activity)) == null) {
-            page = mPageStack.push(new SlidePage(activity));
-        }
-        page.onCreate();
-    }
-
     public static void onPostCreate(Activity activity) {
         SlidePage page;
-        if ((page = findHelperByActivity(activity)) == null) {
-            throw new IllegalArgumentException("You Should call SlideHelper.onCreate(activity) first");
+        if ((page = findSliderByActivity(activity)) == null) {
+            throw new IllegalArgumentException(EXCEPTION_MESSAGE);
         }
         page.onPostCreate();
     }
 
     public static void onDestroy(Activity activity) {
         SlidePage page;
-        if ((page = findHelperByActivity(activity)) == null) {
-            throw new IllegalArgumentException("You Should call SlideHelper.onCreate(activity) first");
-        }
+        if ((page = findSliderByActivity(activity)) == null) return;
         mPageStack.remove(page);
         page.mActivity = null;
     }
-
-    public static void finish(Activity activity) {
-        SlidePage page;
-        if ((page = findHelperByActivity(activity)) == null) {
-            throw new IllegalArgumentException("You Should call SlideHelper.onCreate(activity) first");
-        }
-        page.scrollToFinishActivity();
-    }
-
 
     /**
      * 清空堆栈内的所有页面  cls页面除外
@@ -61,16 +43,14 @@ public class SlideHelper {
      * @param cls
      */
     public static void finishAll(Class cls) {
-        if (mPageStack == null || mPageStack.size() == 0) return;
-        while (true) {
-            SlidePage page = getCurPage();
-            if (page == null) break;
-            if (page.mActivity == null) break;
-            if (cls != null && page.mActivity.getClass().equals(cls)) break;
-            page.mActivity.finish();
-            mPageStack.remove(page);
-            page.mActivity = null;
-        }
+        //TODO: 完成这个功能
+//        if (mPageStack == null || mPageStack.size() == 0) return;
+//        for (SlidePage page : mPageStack) {
+//            if (page.mActivity == null) return;
+//            if (cls != null && cls.equals(page.mActivity.getClass())) return;
+//            page.mActivity.finish();
+//            page.mActivity = null;
+//        }
     }
 
     /**
@@ -131,7 +111,7 @@ public class SlideHelper {
      * @param activity
      * @return
      */
-    private static SlidePage findHelperByActivity(Activity activity) {
+    private static SlidePage findSliderByActivity(Activity activity) {
         for (SlidePage slidePage : mPageStack) {
             if (slidePage.mActivity == activity) return slidePage;
         }

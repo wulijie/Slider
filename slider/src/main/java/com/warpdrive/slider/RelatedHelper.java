@@ -26,7 +26,7 @@ public class RelatedHelper implements SlideListener {
     @Override
     public void onScroll(float percent, int px) {
         if (Build.VERSION.SDK_INT > 11) {
-            SlidePage page = SlideHelper.getPrePage(curPage);
+            SlidePage page = Slider.getPrePage(curPage);
             if (page != null) {
                 page.getSlideLayout().setX(Math.min(-offset * Math.max(1 - percent, 0) + DEFAULT_OFFSET, 0));
                 if (percent == 0) {
@@ -42,7 +42,7 @@ public class RelatedHelper implements SlideListener {
 
     @Override
     public void onScrollToClose() {
-        SlidePage page = SlideHelper.getPrePage(curPage);
+        SlidePage page = Slider.getPrePage(curPage);
         if (Build.VERSION.SDK_INT > 11) {
             if (page != null) page.getSlideLayout().setX(0);
         }

@@ -22,7 +22,7 @@ public class SlidePage {
     }
 
     //页面的回调用于配置滑动效果
-    protected void onCreate() {
+    protected void init() {
         mActivity.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         mActivity.getWindow().getDecorView().setBackgroundColor(Color.TRANSPARENT);
         mSlideLayout = new SlideLayout(mActivity);
