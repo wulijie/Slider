@@ -15,7 +15,7 @@ public class SlidePage {
 
     Activity mActivity;
     SlideLayout mSlideLayout;
-    RelatedSlider slider;
+    RelatedHelper slider;
 
     public SlidePage(Activity activity) {
         this.mActivity = activity;
@@ -27,7 +27,7 @@ public class SlidePage {
         mActivity.getWindow().getDecorView().setBackgroundColor(Color.TRANSPARENT);
         mSlideLayout = new SlideLayout(mActivity);
         mSlideLayout.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        slider = new RelatedSlider(this);
+        slider = new RelatedHelper(this);
     }
 
     protected void onPostCreate() {

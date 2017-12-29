@@ -5,12 +5,12 @@ import android.os.Build;
 /**
  * Created by wulijie on 2017/12/28.
  */
-public class RelatedSlider implements SlideListener {
+public class RelatedHelper implements SlideListener {
     public SlidePage curPage;
     private static final int DEFAULT_OFFSET = 40;
     private int offset = 500;
 
-    public RelatedSlider(SlidePage curPage) {
+    public RelatedHelper(SlidePage curPage) {
         this.curPage = curPage;
     }
 

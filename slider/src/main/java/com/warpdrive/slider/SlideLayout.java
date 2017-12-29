@@ -228,7 +228,7 @@ public class SlideLayout extends FrameLayout {
      */
     public void scrollToFinishActivity() {
         final int childWidth = mContentView.getWidth();
-        int left = 0, top = 0;
+        int left, top = 0;
         left = childWidth + mSlideShadow.getIntrinsicWidth() + OVERSCROLL_DISTANCE;
         mDragHelper.smoothSlideViewTo(mContentView, left, top);
         invalidate();
