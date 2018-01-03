@@ -13,13 +13,12 @@ public class Slider {
 
     private static final String EXCEPTION_MESSAGE = "you should call Slider.with(activity) first";
 
-    public static SlidePage with(Activity activity) {
-        SlidePage page = findSliderByActivity(activity);
-        if (page == null) {
-            page = mPageStack.push(new SlidePage(activity));
-            page.init();
-        }
-        return page;
+    /**
+     * @param activity
+     * @return
+     */
+    public static SlidePage add(Activity activity) {
+        return mPageStack.push(new SlidePage(activity)).init();
     }
 
     public static void onPostCreate(Activity activity) {
@@ -30,7 +29,7 @@ public class Slider {
         page.onPostCreate();
     }
 
-    public static void onDestroy(Activity activity) {
+    public static void remove(Activity activity) {
         SlidePage page;
         if ((page = findSliderByActivity(activity)) == null) return;
         mPageStack.remove(page);
@@ -43,14 +42,20 @@ public class Slider {
      * @param cls
      */
     public static void finishAll(Class cls) {
-        //TODO: 完成这个功能
-//        if (mPageStack == null || mPageStack.size() == 0) return;
-//        for (SlidePage page : mPageStack) {
-//            if (page.mActivity == null) return;
-//            if (cls != null && cls.equals(page.mActivity.getClass())) return;
-//            page.mActivity.finish();
-//            page.mActivity = null;
-//        }
+        if (mPageStack == null || mPageStack.size() == 0) return;
+        SlidePage clsPage = null;
+        for (int i = mPageStack.size() - 1; i >= 0; i--) {
+            SlidePage page = mPageStack.get(i);
+            if (page == null || page.mActivity == null) break;
+            if (cls != null && cls.equals(page.mActivity.getClass())) {
+                clsPage = page;
+            } else {
+                page.mActivity.finish();
+                page.mActivity = null;
+            }
+        }
+        mPageStack.clear();
+        if (clsPage != null) mPageStack.push(clsPage);
     }
 
     /**
@@ -112,8 +117,10 @@ public class Slider {
      * @return
      */
     private static SlidePage findSliderByActivity(Activity activity) {
-        for (SlidePage slidePage : mPageStack) {
-            if (slidePage.mActivity == activity) return slidePage;
+        if (mPageStack == null || mPageStack.size() == 0) return null;
+        for (int i = mPageStack.size() - 1; i >= 0; i--) {
+            SlidePage page = mPageStack.get(i);
+            if (page.mActivity == activity) return page;
         }
         return null;
     }

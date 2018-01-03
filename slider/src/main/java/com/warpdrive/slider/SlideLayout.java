@@ -24,9 +24,7 @@ public class SlideLayout extends FrameLayout {
      * 最低的滑动速度
      */
     private static final int MIN_FLING_VELOCITY = 400; // dips per second
-
-    private static final int DEFAULT_SCRIM_COLOR = 0x99000000;
-
+    private static final int DEFAULT_SCRIM_COLOR = 0x00000000;
     private static final int FULL_ALPHA = 255;
 
     /**

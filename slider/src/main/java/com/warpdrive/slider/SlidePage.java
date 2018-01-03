@@ -12,6 +12,9 @@ import android.view.ViewGroup;
 public class SlidePage {
     private boolean mEnable = true;//判断是否需要侧滑删除,如果不需要就不要入住SlideLayout
     private boolean mRelativeEnable = false;
+    private static final int DEFAULT_EDGE_SIZE = 100;
+    //    private static final float DEFAULT_EDGE_PERCENT = 0.2f;
+    private static final float DEFAULT_SENSITIVITY = 0.5f;//对横向滑动手势的敏感程度
 
     Activity mActivity;
     SlideLayout mSlideLayout;
@@ -22,16 +25,24 @@ public class SlidePage {
     }
 
     //页面的回调用于配置滑动效果
-    protected void init() {
+    protected SlidePage init() {
         mActivity.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         mActivity.getWindow().getDecorView().setBackgroundColor(Color.TRANSPARENT);
         mSlideLayout = new SlideLayout(mActivity);
         mSlideLayout.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         slider = new RelatedHelper(this);
+        //默认值设置 尽量按照模仿微信来
+        setSlideEdge(DEFAULT_EDGE_SIZE);
+//        setSlideEdgePercent(DEFAULT_EDGE_PERCENT);//左边屏幕的百分之20为可滑动区域
+        setSlideSensitivity(DEFAULT_SENSITIVITY);
+        setSlideRelatedEnable(true);//默认支持底层page联动
+        setSlideRelatedOffset(300);
+        return this;
     }
 
-    protected void onPostCreate() {
+    protected SlidePage onPostCreate() {
         handleLayout();
+        return this;
     }
 
     public SlidePage setSlideRelatedEnable(boolean enable) {
@@ -110,7 +121,8 @@ public class SlidePage {
         return mSlideLayout;
     }
 
-    public void scrollToFinishActivity() {
+    public SlidePage scrollToFinishActivity() {
         mSlideLayout.scrollToFinishActivity();
+        return this;
     }
 }
