@@ -9,31 +9,25 @@ import java.util.Stack;
  */
 public class Slider {
 
+    /**
+     * 页面栈
+     */
     private static final Stack<SlidePage> mPageStack = new Stack<>();
-
-    private static final String EXCEPTION_MESSAGE = "you should call Slider.with(activity) first";
 
     /**
      * @param activity
      * @return
      */
-    public static SlidePage add(Activity activity) {
+    public static SlidePage bind(Activity activity) {
         return mPageStack.push(new SlidePage(activity)).init();
     }
 
-    public static void onPostCreate(Activity activity) {
-        SlidePage page;
-        if ((page = findSliderByActivity(activity)) == null) {
-            throw new IllegalArgumentException(EXCEPTION_MESSAGE);
-        }
-        page.onPostCreate();
-    }
 
-    public static void remove(Activity activity) {
-        SlidePage page;
-        if ((page = findSliderByActivity(activity)) == null) return;
+    public static SlidePage unBind(SlidePage page) {
+        if (page == null) return page;
         mPageStack.remove(page);
         page.mActivity = null;
+        return page;
     }
 
     /**
@@ -113,10 +107,12 @@ public class Slider {
     }
 
     /**
+     * 通过activity查询对应的SlidePage
+     *
      * @param activity
      * @return
      */
-    private static SlidePage findSliderByActivity(Activity activity) {
+    public static SlidePage findSliderByActivity(Activity activity) {
         if (mPageStack == null || mPageStack.size() == 0) return null;
         for (int i = mPageStack.size() - 1; i >= 0; i--) {
             SlidePage page = mPageStack.get(i);

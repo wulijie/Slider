@@ -36,33 +36,56 @@ public class SlidePage {
 //        setSlideEdgePercent(DEFAULT_EDGE_PERCENT);//左边屏幕的百分之20为可滑动区域
         setSlideSensitivity(DEFAULT_SENSITIVITY);
         setSlideRelatedEnable(true);//默认支持底层page联动
-        setSlideRelatedOffset(300);
+//        setSlideRelatedOffset(300);
         return this;
     }
 
-    protected SlidePage onPostCreate() {
+    /**
+     * activity完全初始化完毕以后执行此操作
+     *
+     * @return
+     */
+    public SlidePage onPostCreate() {
         handleLayout();
         return this;
     }
 
+    /**
+     * 设置侧滑关联-当前页面下的页面会跟随当前页面有关联的滑动
+     *
+     * @param enable 是否侧滑关联
+     * @return
+     */
     public SlidePage setSlideRelatedEnable(boolean enable) {
         mRelativeEnable = enable;
         slider.setEnable(enable);
         return this;
     }
 
+    /**
+     * 上下两个页面侧滑移动时的距离差值
+     *
+     * @param offset 侧滑移动时的距离差值(配合setSlideRelatedEnable使用）
+     * @return
+     */
     public SlidePage setSlideRelatedOffset(int offset) {
         slider.setOffset(offset);
         return this;
     }
 
-    //是否可滑动关闭
+    /**
+     * 是否可滑动
+     *
+     * @param enable 是否可滑动
+     * @return
+     */
     public SlidePage setSlideEnable(boolean enable) {
         mEnable = enable;
         mSlideLayout.setEnableGesture(enable);
         handleLayout();
         return this;
     }
+
 
     private void handleLayout() {
         if (mEnable || mRelativeEnable) {
@@ -72,54 +95,103 @@ public class SlidePage {
         }
     }
 
-    //可滑动的范围。百分比。200表示为左边200px的屏幕
+    /**
+     * 可滑动的范围。实际像素。200表示为左边200px的屏幕
+     *
+     * @param swipeEdge 可滑动的范围。实际像素
+     * @return
+     */
     public SlidePage setSlideEdge(int swipeEdge) {
         mSlideLayout.setEdgeSize(swipeEdge);
         return this;
     }
 
-    //可滑动的范围。百分比。0.2表示为左边20%的屏幕
+    /**
+     * 可滑动的范围。百分比。0.2表示为左边20%的屏幕
+     *
+     * @param swipeEdgePercent 可滑动的范围。百分比
+     * @return
+     */
     public SlidePage setSlideEdgePercent(float swipeEdgePercent) {
         mSlideLayout.setEdgeSizePercent(swipeEdgePercent);
         return this;
     }
 
-    //对横向滑动手势的敏感程度。0为迟钝 1为敏感
+    /**
+     * 对横向滑动手势的敏感程度。0为迟钝 1为敏感
+     *
+     * @param sensitivity 0为迟钝 1为敏感
+     * @return
+     */
     public SlidePage setSlideSensitivity(float sensitivity) {
         mSlideLayout.setSensitivity(mActivity, sensitivity);
         return this;
     }
 
-    //底层阴影颜色
+    /**
+     * 底层阴影颜色
+     *
+     * @param color 底层阴影颜色
+     * @return
+     */
     public SlidePage setScrimColor(int color) {
         mSlideLayout.setScrimColor(color);
         return this;
     }
 
-    //触发关闭Activity百分比
+    /**
+     * 触发关闭Activity百分比
+     *
+     * @param percent 触发关闭Activity百分比
+     * @return
+     */
     public SlidePage setClosePercent(float percent) {
         mSlideLayout.setScrollThreshold(percent);
         return this;
     }
 
+    /**
+     * 是否不允许拦截事件
+     *
+     * @param disallowIntercept 布尔值
+     * @return
+     */
     public SlidePage setDisallowInterceptTouchEvent(boolean disallowIntercept) {
         mSlideLayout.setDisallowInterceptTouchEvent(disallowIntercept);
         return this;
     }
 
+    /**
+     * 添加页面滑动监听
+     *
+     * @param listener 页面滑动监听
+     * @return
+     */
     public SlidePage addListener(SlideListener listener) {
         mSlideLayout.addSlideListener(listener);
         return this;
     }
 
+    /**
+     * 移除页面滑动监听
+     *
+     * @param listener 页面滑动监听
+     * @return
+     */
     public SlidePage removeListener(SlideListener listener) {
         mSlideLayout.removeSlideListener(listener);
         return this;
     }
 
+    /**
+     * 获取页面滑动布局
+     *
+     * @return
+     */
     public SlideLayout getSlideLayout() {
         return mSlideLayout;
     }
+
 
     public SlidePage scrollToFinishActivity() {
         mSlideLayout.scrollToFinishActivity();
