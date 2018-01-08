@@ -29,7 +29,7 @@ ext {
     bintrayName = 'Slider'//bintray 你创建的new Package的名字
 
     libraryName = 'slider'//你开源库的名字
-    libraryVersion = '1.0.1'//开源库的版本
+    libraryVersion = '1.0.2'//开源库的版本
     libraryDescription = 'a tool for Android'//开源库的描述
 
     publishedGroupId = 'com.warpdrive.slider'//这个发布的id 我一般给包名
