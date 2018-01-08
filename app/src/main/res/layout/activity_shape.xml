@@ -12,4 +12,12 @@
         android:background="@drawable/shape"
         app:title="仿QQ状态栏和标题栏渐变色"
         app:titleTextColor="@android:color/white" />
+
+    <com.jude.rollviewpager.RollPagerView
+        android:id="@+id/vp"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        app:rollviewpager_play_delay="3000" />
+
+
 </LinearLayout>

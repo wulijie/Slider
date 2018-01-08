@@ -31,7 +31,7 @@ public class WebActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        mWebView.loadUrl("file:///android_asset/input_webview.html");
+        mWebView.loadUrl("http://www.baidu.com");
     }
 
     @Override

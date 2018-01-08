@@ -53,10 +53,6 @@
                 android:text="结合WebView使用" />
 
 
-            <Button
-                android:id="@+id/btn_banner"
-                style="@style/btn"
-                android:text="带有Banner的Activity" />
         </LinearLayout>
     </LinearLayout>
 

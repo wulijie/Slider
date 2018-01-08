@@ -30,7 +30,7 @@ public class RelatedHelper implements SlideListener {
             if (page != null) {
                 page.getSlideLayout().setX(Math.min(-offset * Math.max(1 - percent, 0) + DEFAULT_OFFSET, 0));
                 if (percent == 0) {
-                    page.getSlideLayout().setScrollX(0);
+                    page.getSlideLayout().setX(0);
                 }
             }
         }

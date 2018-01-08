@@ -18,7 +18,7 @@ import butterknife.Unbinder;
  * Created by wulijie on 2017/12/29.
  */
 public abstract class BaseActivity extends AppCompatActivity {
-    protected SlidePage page;
+    protected SlidePage mSlidePage;
     private InputMethodManager imm;
     protected ImmersionBar mImmersionBar;
     private Unbinder unbinder;
@@ -31,7 +31,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         unbinder = ButterKnife.bind(this);
 
         //初始化侧滑删除
-        page = Slider.bind(this).setSlideEnable(isSlide());
+        mSlidePage = Slider.bind(this).setSlideEnable(isSlide());
 
         //初始化沉浸式
         if (isImmersionBarEnabled())
@@ -48,14 +48,14 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         //这个别忘了加上！
-        page.onPostCreate();
+        mSlidePage.onPostCreate();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         //移除侧滑删除
-        Slider.unBind(page);
+        Slider.unBind(mSlidePage);
         unbinder.unbind();
         this.imm = null;
         if (mImmersionBar != null)

@@ -36,7 +36,7 @@ public class SlidePage {
 //        setSlideEdgePercent(DEFAULT_EDGE_PERCENT);//左边屏幕的百分之20为可滑动区域
         setSlideSensitivity(DEFAULT_SENSITIVITY);
         setSlideRelatedEnable(true);//默认支持底层page联动
-//        setSlideRelatedOffset(300);
+        setSlideRelatedOffset(300);
         return this;
     }
 
