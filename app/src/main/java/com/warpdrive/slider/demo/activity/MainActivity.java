@@ -41,7 +41,7 @@ public class MainActivity extends BaseActivity {
         return R.layout.activity_main;
     }
 
-    @OnClick({R.id.btn_pic, R.id.btn_shape, R.id.btn_banner,
+    @OnClick({R.id.btn_pic, R.id.btn_shape,
             R.id.btn_coordinator, R.id.btn_web})
     public void onClick(View view) {
         switch (view.getId()) {
