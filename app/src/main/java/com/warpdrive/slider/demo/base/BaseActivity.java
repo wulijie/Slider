@@ -31,7 +31,14 @@ public abstract class BaseActivity extends AppCompatActivity {
         unbinder = ButterKnife.bind(this);
 
         //初始化侧滑删除
-        mSlidePage = Slider.bind(this).setSlideEnable(isSlide());
+        mSlidePage = Slider.bind(this)
+                .setSlideEnable(isSlide())
+                .setSlideEdge(100)//可滑动的范围。实际像素。200表示为左边200px的屏幕(默认是100)
+                //.setSlideEdgePercent(0.2f)//可滑动的范围。百分比。0.2表示为左边20%的屏幕(与setSlideEdge 功能一致使用一个就可以)
+                .setSlideRelatedEnable(true)//是否支持当前页面下的页面跟随联动（默认是true）
+                .setSlideRelatedOffset(300)//与上面的参数配合使用，连动差距（默认300）
+                //.setScrimColor()//设置滑动时蒙层的颜色（默认是透明 仿微信）
+                .setSlideSensitivity(0.5f);//对横向滑动手势的敏感程度。0为迟钝 1为敏感(默认0.5f)
 
         //初始化沉浸式
         if (isImmersionBarEnabled())
