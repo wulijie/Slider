@@ -11,15 +11,17 @@
   
   
 #### 效果展示
+	
+	
 
 
 #### 如何使用
 1. Gradle集成方式
 
-  ```
-	compile 'com.warpdrive.slider:slider:最新版本'
-
-  ```
+	  ```
+		compile 'com.warpdrive.slider:slider:最新版本'
+	
+	  ```
 2. Maven集成方式
 
 
