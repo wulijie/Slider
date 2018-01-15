@@ -7,12 +7,12 @@
 ---
 
 #### 最新版本
-  Slider最新版本![Download](https://api.bintray.com/packages/wulijie/maven/Slider/images/download.svg)
+  **slider最新版本**[![Download](https://api.bintray.com/packages/wulijie/maven/Slider/images/download.svg)](https://bintray.com/wulijie/maven/Slider/_latestVersion)
   
   
 #### 效果展示
 	
-	
+ [Demo Gif](https://raw.githubusercontent.com/wulijie/Slider/master/demo.jpg)
 
 
 #### 如何使用
@@ -20,7 +20,6 @@
 
 	  ```
 		compile 'com.warpdrive.slider:slider:最新版本'
-	
 	  ```
 2. Maven集成方式
 
