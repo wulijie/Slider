@@ -12,7 +12,7 @@
   
 #### 效果展示
 	
- [Demo Gif](https://raw.githubusercontent.com/wulijie/Slider/master/demo.jpg)
+ ![Demo](https://raw.githubusercontent.com/wulijie/Slider/master/demo.jpg)
 
 
 #### 如何使用
