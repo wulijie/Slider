@@ -1,6 +1,6 @@
 # Slider
 ```
-    使用Slider,轻松实现页面侧滑删除的功能
+使用Slider,轻松实现页面侧滑删除的功能
 ```
 ##### [![Hex.pm](https://img.shields.io/hexpm/l/plug.svg)](https://www.apache.org/licenses/LICENSE-2.0)
 
@@ -18,20 +18,18 @@
 #### 如何使用
 1. Gradle集成方式
 	```
-		compile 'com.warpdrive.slider:slider:最新版本'
+	compile 'com.warpdrive.slider:slider:最新版本'
 	```
 2. Maven集成方式
-
-
-  ```
-<dependency>
-  <groupId>com.warpdrive.slider</groupId>
-  <artifactId>slider</artifactId>
-  <version>1.0.2</version>
-  <type>pom</type>
-</dependency>
-
-  ```
+	
+	 ```
+	<dependency>
+	  <groupId>com.warpdrive.slider</groupId>
+	  <artifactId>slider</artifactId>
+	  <version>1.0.2</version>
+	  <type>pom</type>
+	</dependency>
+	```
   
 3. 初始化
 
