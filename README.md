@@ -17,10 +17,9 @@
 
 #### 如何使用
 1. Gradle集成方式
-
-	  ```
+	```
 		compile 'com.warpdrive.slider:slider:最新版本'
-	  ```
+	```
 2. Maven集成方式
 
 
@@ -38,8 +37,7 @@
 
 	```
 	//在BaseActivity onCreate()方法内初始化
-public class BaseActivity extends AppCompatActivity {
-	 
+	public class BaseActivity extends AppCompatActivity {
 	 protected SlidePage	mSlidePage；//抽出成员变量
 	
 	  @Override
@@ -54,8 +52,6 @@ public class BaseActivity extends AppCompatActivity {
                 //.setScrimColor()//设置滑动时蒙层的颜色（默认是透明 仿微信）
                 .setSlideSensitivity(0.5f)//对横向滑动手势的敏感程度。0为迟钝 1为敏感(默认0.5f)
 	}
-	
-	
 	//在Activity的onPostCreate 生命周期内添加
 	
 	@Override
@@ -72,15 +68,12 @@ public class BaseActivity extends AppCompatActivity {
         //移除侧滑删除
         Slider.unBind(mSlidePage);
     }
-		
 	```
 4. 管理Activity
 	
 	```
-	
-		Slider.finishAll();//清空所有页面
-        Slider.finishAll(Class cls);//除某一个页面外 其余都清空
-        Slider.getCurActivity();//获取栈顶Activity
-        Slider.getPreActivity();//获取栈顶下的Activity
-	
+	Slider.finishAll();//清空所有页面
+   Slider.finishAll(Class cls);//除某一个页面外其余都清空
+   Slider.getCurActivity();//获取栈顶Activity
+   Slider.getPreActivity();//获取栈顶下的Activity
 	```
